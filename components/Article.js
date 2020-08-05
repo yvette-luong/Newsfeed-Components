@@ -1,5 +1,5 @@
 
-
+import {gsap} from "gsap";
 /* This is the data we will be using to create our articles */
 /* Look over this data, then proceed to line 91*/
 const data = [
@@ -140,6 +140,9 @@ let articleMaker = (objectData) =>{
   let p3   = document.createElement('p');
   let span = document.createElement('span');
 
+
+
+  
   //adding style and  info on elements
   div.classList.add('article')
   h2.textContent = objectData.title;
@@ -147,16 +150,28 @@ let articleMaker = (objectData) =>{
   p1.classList.add('date');
   p2.classList.add('date');
   p3.classList.add('date'); 
+
+  
+
   p.textContent = objectData.date;
   p1.textContent = objectData.firstParagraph;
   p2.textContent = objectData.secondParagraph;
   p3.textContent = objectData.thirdParagraph;
   span.classList.add('expandButton');
   span.innerHTML = "+"
+  
 
+
+
+  // closeButton.textContent = constants.close //stretch
 
   //inserting to the DOM
   const parentDiv = document.querySelector('.articles');
+
+  // panelButtons.addEventListener('click', evt => {
+  //   panelContent.classList.toggle('toggle-on')
+  // }) //stretch
+
   parentDiv.appendChild(div);
   div.appendChild(h2);
   div.appendChild(p);
@@ -164,6 +179,7 @@ let articleMaker = (objectData) =>{
   div.appendChild(p2);
   div.appendChild(p3);
   div.appendChild(span);
+
   span.addEventListener('click', () =>{
     if(div.className === 'article'){
       div.className = 'article-open'
@@ -174,3 +190,5 @@ let articleMaker = (objectData) =>{
   return div;
 }
 data.forEach(articleMaker);
+
+gsap.from(".article", {rotation: 30, x: 120, duration: 1});
