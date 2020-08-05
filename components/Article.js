@@ -1,3 +1,5 @@
+
+import {gsap} from "gsap";
 /* This is the data we will be using to create our articles */
 /* Look over this data, then proceed to line 91*/
 const data = [
@@ -101,13 +103,92 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
+  1- Write a component called "'articleMaker" --> create and article : to create an artical needs <div>, <h2>, <p>, <span> 
+  2- return markup line 
+  3- the function should take one of argument : AN OBJECT OR 5 STRINGS
+
   Your function should take either an object as its one argument, or 5 separate strings mapping to each property of an article object.
 
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
 
+  1- add evenListener to expandButton span. 
+  2- listener have to toggle <class='article-open'> and <div class = 'article'>
+
   Step 3: Don't forget to return something from your function!
+
+  1 - return something from the FUNCTION
 
   Step 4: Outside your function, loop over the data. At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  1- Create A LOOP outside the function.
+  2 - at EACH ITERATION --> Create and article --> append it to DOM --> located inside <div class = 'articles'> 
+
+  Step 5: Add a new article to the array. 
+  Make sure it is in the same format as the others. 
+  Refresh the page to see the new article.
+  
+
 */
+
+let articleMaker = (objectData) =>{
+  //creating elements
+  let div  = document.createElement('div');
+  let h2   = document.createElement('h2');
+  let p    = document.createElement('p')
+  let p1   = document.createElement('p');
+  let p2   = document.createElement('p');
+  let p3   = document.createElement('p');
+  let span = document.createElement('span');
+
+
+
+  
+  //adding style and  info on elements
+  div.classList.add('article')
+  h2.textContent = objectData.title;
+  p.classList.add('date');
+  p1.classList.add('date');
+  p2.classList.add('date');
+  p3.classList.add('date'); 
+
+  
+
+  p.textContent = objectData.date;
+  p1.textContent = objectData.firstParagraph;
+  p2.textContent = objectData.secondParagraph;
+  p3.textContent = objectData.thirdParagraph;
+  span.classList.add('expandButton');
+  span.innerHTML = "+"
+  
+
+
+
+  // closeButton.textContent = constants.close //stretch
+
+  //inserting to the DOM
+  const parentDiv = document.querySelector('.articles');
+
+  // panelButtons.addEventListener('click', evt => {
+  //   panelContent.classList.toggle('toggle-on')
+  // }) //stretch
+
+  parentDiv.appendChild(div);
+  div.appendChild(h2);
+  div.appendChild(p);
+  div.appendChild(p1);
+  div.appendChild(p2);
+  div.appendChild(p3);
+  div.appendChild(span);
+
+  span.addEventListener('click', () =>{
+    if(div.className === 'article'){
+      div.className = 'article-open'
+    }else{
+      div.className = 'article';
+    }
+  })
+  return div;
+}
+data.forEach(articleMaker);
+
+gsap.from(".article", {rotation: 30, x: 120, duration: 1});
